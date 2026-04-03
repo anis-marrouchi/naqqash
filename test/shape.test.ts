@@ -76,7 +76,7 @@ describe('shapeArabic', () => {
   });
 
   it('starts new joining group after lam-alef ligature', () => {
-    // الإجمالي — after لإ ligature, jeem should be INITIAL (not medial)
+    // الإجم — after لإ ligature, jeem should be INITIAL (not medial)
     // because the ligature ends with alef which cannot join left
     const result = shapeArabic('الإجم');
     // ا isolated, لإ ligature, ج initial, م final
