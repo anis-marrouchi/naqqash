@@ -88,7 +88,10 @@ export function shapeArabic(text: string): ShapedChar[] {
       continue;
     }
 
-    const jt = getJoiningType(r.cp);
+    let jt = getJoiningType(r.cp);
+    // Lam-alef ligature ends with alef (right-joining only),
+    // so the ligature can only join from the right, not the left
+    if (r.ligature != null) jt = JoiningType.Right;
     joining.push({ cp: r.cp, joiningType: jt, index: result.length, ligature: r.ligature });
     // Placeholder — we'll fill shaped value in the next step
     result.push({ original: r.cp, shaped: r.cp, isLigature: false });
@@ -162,6 +165,9 @@ export function shapeArabic(text: string): ShapedChar[] {
  * Shape Arabic text and return a string with presentation forms applied.
  * Non-Arabic characters pass through unchanged.
  * The string is in logical order (not reversed for RTL).
+ *
+ * For PDF rendering: pass the result directly to drawText() — PDF viewers
+ * handle RTL direction natively via the Unicode bidi algorithm.
  *
  * @param text - Input Unicode Arabic text
  * @returns Shaped string using Presentation Forms-B

@@ -6,7 +6,7 @@
  */
 
 import type { PDFPage, PDFFont, Color } from 'pdf-lib';
-import { shapeArabicVisual } from './shape';
+import { shapeArabicText } from './shape';
 
 export interface DrawArabicTextOptions {
   /** The pdf-lib font (must support Arabic glyphs, e.g. embedded Amiri) */
@@ -55,7 +55,7 @@ export function drawArabicText(
   const lineSpacing = size * lineHeight;
 
   for (let i = 0; i < lines.length; i++) {
-    const shaped = shapeArabicVisual(lines[i]);
+    const shaped = shapeArabicText(lines[i]);
     const textWidth = font.widthOfTextAtSize(shaped, size);
 
     let drawX: number;
@@ -92,7 +92,7 @@ function wrapText(
 
   for (const word of words) {
     const testLine = currentLine ? `${currentLine} ${word}` : word;
-    const shaped = shapeArabicVisual(testLine);
+    const shaped = shapeArabicText(testLine);
     const width = font.widthOfTextAtSize(shaped, size);
 
     if (width > maxWidth && currentLine) {

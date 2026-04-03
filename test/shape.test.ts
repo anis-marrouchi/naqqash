@@ -75,6 +75,15 @@ describe('shapeArabic', () => {
     expect(result[2].shaped).toBe(0xFE90); // Beh final
   });
 
+  it('starts new joining group after lam-alef ligature', () => {
+    // الإجمالي — after لإ ligature, jeem should be INITIAL (not medial)
+    // because the ligature ends with alef which cannot join left
+    const result = shapeArabic('الإجم');
+    // ا isolated, لإ ligature, ج initial, م final
+    expect(result).toHaveLength(4); // alef + ligature + jeem + meem
+    expect(result[2].shaped).toBe(0xFE9F); // Jeem INITIAL, not medial (0xFEA0)
+  });
+
   it('handles the word "بسم" correctly', () => {
     // Beh + Seen + Meem
     const result = shapeArabic('بسم');
