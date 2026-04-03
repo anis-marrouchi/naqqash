@@ -1,0 +1,65 @@
+{
+  "name": "naqqash",
+  "version": "0.1.0",
+  "description": "Arabic PDF text rendering in 15KB. No HarfBuzz. No Puppeteer. No WASM.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./pdf-lib": {
+      "types": "./dist/pdf-lib.d.ts",
+      "import": "./dist/pdf-lib.js",
+      "require": "./dist/pdf-lib.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "fonts"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "arabic",
+    "pdf",
+    "rtl",
+    "text-shaping",
+    "pdf-lib",
+    "typography",
+    "invoice",
+    "e-invoicing",
+    "zatca",
+    "serverless"
+  ],
+  "author": "Anis Marrouchi <anismarrouchi@hotmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anis-marrouchi/naqqash.git"
+  },
+  "devDependencies": {
+    "pdf-lib": "^1.17.1",
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
+  },
+  "peerDependencies": {
+    "pdf-lib": ">=1.17.0"
+  },
+  "peerDependenciesMeta": {
+    "pdf-lib": {
+      "optional": true
+    }
+  }
+}
